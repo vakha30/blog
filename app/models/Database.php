@@ -28,4 +28,16 @@ class Database
         $stm->execute();
         return $stm->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    function getOne($table, $id)
+    {
+        $select = $this->queryFactory->newSelect();
+        $select->cols(['*'])
+            ->from($table)
+            ->where("id = :id")
+            ->bindValue(":id", $id);
+        $stm = $this->pdo->prepare($select->getStatement());
+        $stm->execute($select->getBindValues());
+        return $stm->fetch(PDO::FETCH_ASSOC);
+    }
 }

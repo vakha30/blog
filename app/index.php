@@ -4,6 +4,7 @@ use Aura\SqlQuery\QueryFactory;
 use Delight\Auth\Auth;
 use DI\Container;
 use DI\ContainerBuilder;
+use FastRoute\RouteCollector;
 use League\Plates\Engine;
 
 $container = new Container();
@@ -32,11 +33,13 @@ try {
 
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/', ["App\controllers\HomeController", "index"]);
+    $r->get('/', ["App\controllers\HomeController", "index"]);
     // {id} must be a number (\d+)
-//    $r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');
-//    // The /{title} suffix is optional
-//    $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
+
+    $r->addGroup('/admin', function (RouteCollector $r) {
+        $r->get('', ["App\controllers\admin\HomeController", "index"]);
+        $r->get('/articles', ["App\controllers\admin\ArticlesController", "index"]);
+    });
 });
 
 // Fetch method and URI from somewhere
@@ -52,11 +55,11 @@ $uri = rawurldecode($uri);
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
-        // ... 404 Not Found
+        dd("404 | ERROR");
         break;
     case FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
         $allowedMethods = $routeInfo[1];
-        // ... 405 Method Not Allowed
+        dd("405 | ERROR");
         break;
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];

@@ -13,7 +13,7 @@
         <?php foreach($posts as $post): ?>
             <article class="article">
                 <div class="article__img">
-                    <img src="img/repair.png" alt="" class="article__img">
+                    <img src="/uploads/<?= $post['image'] ?>" alt="" class="article__img">
                 </div>
                 <h5 class="article__title pt-2"><?= $post['title'] ?></h5>
                 <p class="article__text">
