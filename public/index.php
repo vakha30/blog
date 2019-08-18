@@ -5,4 +5,5 @@ if(!session_status()) {
 }
 
 require "../vendor/autoload.php";
+require "../app/helpers.php";
 require "../app/index.php";

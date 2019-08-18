@@ -14,13 +14,13 @@ $containerBuilder->addDefinitions([
         return new Engine('../app/views');
     },
     PDO::class => function() {
-        return new PDO("mysql:host=localhost; dbname=notepad_db", "root", "");
+        return new PDO("mysql:host=localhost; dbname=blog_db", "root", "");
     },
     QueryFactory::class => function() {
         return new QueryFactory("mysql");
     },
     Auth::class => function() {
-        return new Auth(new PDO("mysql:host=localhost; dbname=notepad_db", "root", ""));
+        return new Auth(new PDO("mysql:host=localhost; dbname=blog_db", "root", ""));
     },
 
 ]);
