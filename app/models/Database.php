@@ -40,4 +40,15 @@ class Database
         $stm->execute($select->getBindValues());
         return $stm->fetch(PDO::FETCH_ASSOC);
     }
+
+    function add($table, $data)
+    {
+
+        $insert = $this->queryFactory->newInsert();
+        $insert->into($table)
+            ->cols($data);
+        $stm = $this->pdo->prepare($insert->getStatement());
+        $stm->execute($insert->getBindValues());
+
+    }
 }

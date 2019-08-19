@@ -39,6 +39,8 @@ $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->addGroup('/admin', function (RouteCollector $r) {
         $r->get('', ["App\controllers\admin\HomeController", "index"]);
         $r->get('/articles', ["App\controllers\admin\ArticlesController", "index"]);
+        $r->get('/articles/create', ["App\controllers\admin\ArticlesController", "create"]);
+        $r->post('/articles/store', ["App\controllers\admin\ArticlesController", "store"]);
     });
 });
 
