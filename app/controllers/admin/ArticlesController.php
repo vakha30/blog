@@ -48,4 +48,31 @@ class ArticlesController
         $this->db->add('posts', $data);
         header("Location: /admin/articles/create");
     }
+
+    function edit($id)
+    {
+        $post = $this->db->getOne('posts', $id);
+        echo $this->view->render("admin/articles/edit", ["post" => $post]);
+    }
+
+    function update($id)
+    {
+        $image = $this->imageManager->uploadImage($_FILES['image']);
+        $data = [
+            "title" => $_POST['title'],
+            "text" => $_POST['text'],
+            "image" => $image,
+            "date" => date("Y-m-d H:i:s"),
+            "category_id" => $_POST['category_id'],
+            "user_id" => "1"
+        ];
+        $this->db->update('posts', $id, $data);
+        header("Location: /admin/articles");
+    }
+
+    function delete($id)
+    {
+        $this->db->delete('posts', $id);
+        header("Location: /admin/articles");
+    }
 }

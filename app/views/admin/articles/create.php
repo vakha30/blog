@@ -29,7 +29,7 @@
                             <!-- /.box-header -->
                             <div class="box-body">
                                 <div class="col-md-6">
-                                    <form action="/admin/articles/store" method="post"  enctype="multipart/form-data">
+                                    <form action="/admin/articles/store" method="post" enctype="multipart/form-data">
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Название статьи</label>
                                             <input type="text" class="form-control" id="exampleInputEmail1" name="title" >

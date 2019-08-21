@@ -33,3 +33,10 @@ function getUser($id)
     $database = new Database($pdo, $queryFactory);
     return $database->getOne('users', $id);
 }
+
+function isLoged()
+{
+    global $container;
+    $auth = $container->get('Delight\Auth\Auth');
+    return $auth->isLoggedIn();
+}

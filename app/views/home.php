@@ -20,12 +20,11 @@
                     <?= mb_substr($post['text'], 0, 60)  ?> ...
                 </p>
                 <p class="article__author">Автор: <a class="text-primary" href="#">Мансур</a></p>
-                <p class="article__author">Категория: <a class="text-primary" href="#">Природа</a></p>
-                <p class="article__author">Дата: <span class="text-secondary">02.11.1992</span></p>
+                <p class="article__author">Категория: <a class="text-primary" href="#"><?= getCategory($post['category_id'])['title'] ?></a></p>
+                <p class="article__author">Дата: <span class="text-secondary"><?= $post['date'] ?></span></p>
                 <a href="article.html" class="article__link text-primary float-right">Прочитать</a>
             </article>
         <?php endforeach; ?>
-
 
     </div>
 </div>

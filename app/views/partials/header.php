@@ -2,12 +2,18 @@
     <div class="container">
         <div class="row pl-2 pr-2 pt-3 pb-3">
             <div class="col-md-6">
-                <a href="#" class="header__logo">Блог</a>
+                <a href="/" class="header__logo">Блог</a>
             </div>
             <div class="col-md-6">
                 <div class="header__auth d-flex justify-content-end">
-                    <a href="login.html" class="header__login btn btn-primary mr-2">Войти</a>
-                    <a href="register.html" class="header__register btn btn-warning">Зарегистрироваться</a>
+                    <?php if(!isLoged()):?>
+                        <a href="/login" class="header__login btn btn-primary mr-2">Войти</a>
+                        <a href="/register" class="header__register btn btn-warning">Зарегистрироваться</a>
+                    <?php endif;?>
+
+                    <?php if(isLoged()):?>
+                        <a href="/logout" class="header__login btn btn-warning mr-2">Выйти</a>
+                    <?php endif;?>
                 </div>
             </div>
         </div>

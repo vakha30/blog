@@ -34,13 +34,30 @@ try {
 
 $dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
     $r->get('/', ["App\controllers\HomeController", "index"]);
-    // {id} must be a number (\d+)
+    $r->get('/register', ["App\controllers\RegisterController", "showForm"]);
+    $r->post('/register', ["App\controllers\RegisterController", "register"]);
+    $r->get('/verify_email', ["App\controllers\VerifiController", "verifi"]);
+
+    $r->get('/login', ["App\controllers\LoginController", "showForm"]);
+    $r->post('/login', ["App\controllers\LoginController", "login"]);
+    $r->get('/logout', ["App\controllers\LoginController", "logout"]);
 
     $r->addGroup('/admin', function (RouteCollector $r) {
         $r->get('', ["App\controllers\admin\HomeController", "index"]);
+
         $r->get('/articles', ["App\controllers\admin\ArticlesController", "index"]);
         $r->get('/articles/create', ["App\controllers\admin\ArticlesController", "create"]);
         $r->post('/articles/store', ["App\controllers\admin\ArticlesController", "store"]);
+        $r->get('/articles/{id:\d+}/edit', ["App\controllers\admin\ArticlesController", "edit"]);
+        $r->get('/articles/{id:\d+}/delete', ["App\controllers\admin\ArticlesController", "delete"]);
+        $r->post('/articles/{id:\d+}/update', ["App\controllers\admin\ArticlesController", "update"]);
+
+        $r->get('/category', ["App\controllers\admin\CategoryController", "index"]);
+        $r->get('/category/create', ["App\controllers\admin\CategoryController", "create"]);
+        $r->post('/category/store', ["App\controllers\admin\CategoryController", "store"]);
+        $r->get('/category/{id:\d+}/edit', ["App\controllers\admin\CategoryController", "edit"]);
+        $r->post('/category/{id:\d+}/update', ["App\controllers\admin\CategoryController", "update"]);
+        $r->get('/category/{id:\d+}/delete', ["App\controllers\admin\CategoryController", "delete"]);
     });
 });
 
